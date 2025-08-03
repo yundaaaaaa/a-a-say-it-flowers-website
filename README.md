@@ -1,2 +1,791 @@
-# a-a-say-it-flowers-website
-Website Sewa Papan Ucapan AA Sayit Flowers
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA Sayit Flowers - Sewa Papan Ucapan Jogja</title>
+    <meta name="description" content="Sewa papan ucapan berkualitas di Yogyakarta. Berbagai tema untuk ulang tahun, pernikahan, wisuda, dan acara spesial lainnya. Gratis antar radius 5KM.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            background: white;
+            color: #ff6b6b;
+            padding: 8px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: #ff6b6b;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 80px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .portfolio-item:hover::before {
+            opacity: 1;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card.featured {
+            transform: scale(1.05);
+            border: 3px solid #ff6b6b;
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULER';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 40px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 1rem 0;
+        }
+
+        .price-features {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .price-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-features li:last-child {
+            border-bottom: none;
+        }
+
+        .price-features i {
+            color: #28a745;
+            margin-right: 10px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #ffd93d;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25d366;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #ff5252;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #ff6b6b;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 60px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            }
+            100% {
+                box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                AA Sayit Flowers
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#pricing">Harga</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Sewa Papan Ucapan Terbaik di Yogyakarta</h1>
+            <p>Wujudkan momen spesial Anda dengan papan ucapan berkualitas premium. Berbagai tema tersedia untuk setiap occasion!</p>
+            <a href="#contact" class="cta-button">
+                <i class="fas fa-phone"></i> Pesan Sekarang
+            </a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Layanan Kami</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-birthday-cake"></i>
+                    <h3>Ulang Tahun</h3>
+                    <p>Papan ucapan dengan berbagai tema ulang tahun untuk anak dan dewasa. Custom design sesuai keinginan Anda.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-ring"></i>
+                    <h3>Pernikahan</h3>
+                    <p>Elegant wedding signage untuk menyambut tamu dan menciptakan atmosfer romantis di hari bahagia Anda.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Wisuda</h3>
+                    <p>Rayakan pencapaian akademik dengan papan ucapan wisuda yang membanggakan dan berkesan.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-baby"></i>
+                    <h3>Baby Shower</h3>
+                    <p>Welcome the little one dengan papan ucapan baby shower yang menggemaskan dan penuh cinta.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Corporate Event</h3>
+                    <p>Professional signage untuk acara kantor, launching produk, dan corporate celebration lainnya.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-heart"></i>
+                    <h3>Custom Design</h3>
+                    <p>Punya ide khusus? Kami siap mewujudkan design impian Anda dengan sentuhan profesional.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Portfolio Kami</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <span>Birthday Party Theme</span>
+                </div>
+                <div class="portfolio-item">
+                    <span>Wedding Reception</span>
+                </div>
+                <div class="portfolio-item">
+                    <span>Graduation Celebration</span>
+                </div>
+                <div class="portfolio-item">
+                    <span>Baby Welcome</span>
+                </div>
+                <div class="portfolio-item">
+                    <span>Corporate Event</span>
+                </div>
+                <div class="portfolio-item">
+                    <span>Custom Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Paket Harga</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Mini</h3>
+                    <div class="price">Rp 25K<span style="font-size: 0.5em;">/hari</span></div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Ukuran 30x40 cm</li>
+                        <li><i class="fas fa-check"></i> Design template</li>
+                        <li><i class="fas fa-check"></i> Include stand</li>
+                        <li><i class="fas fa-check"></i> 1 hari sewa</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Medium</h3>
+                    <div class="price">Rp 50K<span style="font-size: 0.5em;">/hari</span></div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Ukuran 60x80 cm</li>
+                        <li><i class="fas fa-check"></i> Custom design</li>
+                        <li><i class="fas fa-check"></i> Include stand & props</li>
+                        <li><i class="fas fa-check"></i> Free delivery 5KM</li>
+                        <li><i class="fas fa-check"></i> Setup assistance</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Large</h3>
+                    <div class="price">Rp 85K<span style="font-size: 0.5em;">/hari</span></div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Ukuran 100x120 cm</li>
+                        <li><i class="fas fa-check"></i> Premium design</li>
+                        <li><i class="fas fa-check"></i> Complete decoration</li>
+                        <li><i class="fas fa-check"></i> Free delivery & setup</li>
+                        <li><i class="fas fa-check"></i> Photo documentation</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Extra Large</h3>
+                    <div class="price">Rp 125K<span style="font-size: 0.5em;">/hari</span></div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Ukuran 150x200 cm</li>
+                        <li><i class="fas fa-check"></i> Luxury design</li>
+                        <li><i class="fas fa-check"></i> Full decoration set</li>
+                        <li><i class="fas fa-check"></i> Professional setup</li>
+                        <li><i class="fas fa-check"></i> Photography service</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>08.00-22.00 WIB</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Jl. Pesona Bunga Nirwana 2, Pandeyan, Banguntapan, Sewon, Yogyakarta</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-truck"></i>
+                        <span>GRATIS ANTAR RADIUS 5KM</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>CLOSE ORDER SEMENTARA</span>
+                    </div>
+                    <a href="https://wa.me/6285742517410?text=Halo%20AA%20Sayit%20Flowers,%20saya%20tertarik%20dengan%20sewa%20papan%20ucapan" 
+                       class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat WhatsApp
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <h3>Kirim Pesan</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">No. WhatsApp</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="acara">Jenis Acara</label>
+                            <input type="text" id="acara" name="acara" placeholder="Ulang tahun, pernikahan, wisuda, dll" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal Acara</label>
+                            <input type="date" id="tanggal" name="tanggal" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="pesan">Pesan Khusus</label>
+                            <textarea id="pesan" name="pesan" placeholder="Ceritakan detail acara Anda..."></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://instagram.com/aa_sayitflowers" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/6285742517410" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://msha.ke/aa.sayitflowers" target="_blank">
+                    <i class="fas fa-link"></i>
+                </a>
+            </div>
+            <p>&copy; 2024 AA Sayit Flowers. All rights reserved. Made with ❤️ in Yogyakarta</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6285742517410?text=Halo%20AA%20Sayit%20Flowers,%20saya%20mau%20tanya%20tentang%20sewa%20papan%20ucapan" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nama = document.getElementById('nama').value;
+            const phone = document.getElementById('phone').value;
+            const acara = document.getElementById('acara').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const pesan = document.getElementById('pesan').value;
+            
+            const message = `Halo AA Sayit Flowers!%0A%0ANama: ${nama}%0ANo. HP: ${phone}%0AJenis Acara: ${acara}%0ATanggal: ${tanggal}%0APesan: ${pesan}%0A%0ASaya tertarik dengan layanan sewa papan ucapan. Mohon info lebih lanjut. Terima kasih!`;
+            
+            window.open(`https://wa.me/6285742517410?text=${message}`, '_blank');
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 107, 107, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #ff6b6b, #ffd93d)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Portfolio items click effect
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const message = `Halo AA Sayit Flowers! Saya tertarik dengan tema "${item.textContent}". Bisa minta info lebih detail?`;
+                window.open(`https://wa.me/6285742517410?text=${encodeURIComponent(message)}`, '_blank');
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards and pricing cards
+        document.querySelectorAll('.service-card, .pricing-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
